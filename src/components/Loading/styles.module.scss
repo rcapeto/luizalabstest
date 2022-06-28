@@ -1,0 +1,18 @@
+.loadingContainer {
+   width: 100%;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   flex-direction: column;
+   margin: 20px;
+   padding: 20px;
+
+   .svg {
+      animation: Loading 1s linear infinite;
+   }
+}
+
+@keyframes Loading {
+   0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

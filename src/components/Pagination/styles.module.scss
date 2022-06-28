@@ -1,0 +1,17 @@
+.paginationContainer {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   gap: 5px;
+
+   .info {
+      color: var(--gray);
+      font-size: 16px;
+      line-height: 26px;
+      font-weight: 400
+   }
+};
+
+.paginationContent {
+   display: flex;
+}

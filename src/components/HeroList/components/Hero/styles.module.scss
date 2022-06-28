@@ -1,0 +1,43 @@
+.heroItemContainer {
+   margin: 10px;
+   cursor: pointer;
+   text-decoration: none;
+
+   img {
+      width: 100%;
+      object-fit: cover;
+      height: 250px;
+   }
+   div {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 10px;
+
+      p {
+         color: var(--gray);
+         font-weight: bold;
+         font-size: 16px;
+         text-decoration: none;
+      }
+
+      button {
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         border: 0;
+         background-color: transparent;
+         transition: all ease .6s;
+         cursor: pointer;
+
+         &:hover {
+            filter: brightness(.6);
+         }
+
+         img {
+            max-width: 15px;
+            height: unset;
+         }
+      }
+   }
+}

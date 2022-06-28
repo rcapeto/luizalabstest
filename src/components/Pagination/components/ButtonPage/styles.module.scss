@@ -1,0 +1,20 @@
+.buttonPageContainer {
+   margin: 0 4px;
+   color: var(--gray);
+   background-color: var(--red-light);
+   border: 1px solid var(--red);
+   padding: 5px;
+   border-radius: 2.5px;
+   cursor: pointer;
+   transition: all ease .6s;
+
+   &:hover {
+      filter: brightness(.6);
+   }
+
+
+   &.isCurrent {
+      background-color: var(--red);
+      color: var(--white);
+   }
+};
