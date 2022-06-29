@@ -3,6 +3,14 @@
    cursor: pointer;
    text-decoration: none;
 
+   @media (max-width: 575px) {
+      margin: 10px;
+   }
+
+   @media (max-width: 480px) {
+      margin: 10px 0;
+   }
+
    img {
       width: 100%;
       object-fit: cover;

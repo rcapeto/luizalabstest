@@ -9,6 +9,7 @@ export const ApplicationRoutes: FunctionComponent = () => {
       <BrowserRouter>
          <Routes>
             <Route path="/" element={<Home />}/>
+            <Route path="/hero" element={<Hero />}/>
             <Route path="/hero/:heroId" element={<Hero />}/>
          </Routes>
       </BrowserRouter>

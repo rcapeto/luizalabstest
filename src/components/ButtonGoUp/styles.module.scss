@@ -1,0 +1,28 @@
+.buttonGoUpContainer {
+   background-color: var(--red);
+   box-shadow: 0px 3px 6px #00000029;
+   position: fixed;
+   bottom: 20px;
+   right: 20px;
+   height: 40px;
+   width: 40px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   border-radius: 50%;
+   border: 1px solid var(--white);
+   transition: all ease 1s;
+   cursor: pointer;
+
+   &.show {
+      visibility: visible;
+   }
+
+   &.hide {
+      visibility: hidden;
+   }
+
+   &:hover {
+      filter: brightness(.6);
+   }
+}

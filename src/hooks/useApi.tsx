@@ -3,8 +3,12 @@ import { GetResponse, Hero, ComicAPIData } from '../@types/api';
 
 import { getHeroes, getHero, getComicsByHero } from '../services/get';
 
-export const useGetHeroes = (page?: number, options?: UseQueryOptions<GetResponse<Hero[]>>) => {
-   return useQuery<GetResponse<Hero[]>>(['heroes', page], async () => await getHeroes(page), {
+export const useGetHeroes = (
+   page?: number,
+   sortByName?: boolean, 
+   options?: UseQueryOptions<GetResponse<Hero[]>>
+) => {
+   return useQuery<GetResponse<Hero[]>>(['heroes', page, sortByName], async () => await getHeroes(page, sortByName), {
       ...options,
       staleTime: 1000 * 5 //5 seconds (não atualizar por 5 segundos),
    });

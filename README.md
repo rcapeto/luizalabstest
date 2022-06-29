@@ -33,6 +33,14 @@ $ yarn
 # Start project
 $ yarn dev
 ```
+
+- Here in the project has a `env` "mock file", called `.env.test`;
+- After start the application, create `.env.local` file and configure your environment variables;
+- Paste all environment variables in `.env.test` to `.env.local`;
+- Click [here](https://developer.marvel.com/docs) to get your API key;
+- Follow the instructions;
+- Copy your API key and paste in your `.env.local` file.
+
 The app will be available in the [web address](http://localhost:3000).
 
 ## 💻 Project

@@ -5,6 +5,7 @@
    --gray: #504a4a;
    --bg: #f8f8f8;
    --white: #fff;
+   --green: #d6edd6;
 }
 
 * {
@@ -17,4 +18,17 @@ body {
    font-family: 'Roboto', sans-serif;
    -webkit-font-smoothing: antialiased;
    background: var(--white);
+}
+
+body::-webkit-scrollbar {
+   width: 5px;
+}
+ 
+body::-webkit-scrollbar-track {
+   background: var(--white);
+}
+ 
+body::-webkit-scrollbar-thumb {
+   background: var(--red);
+   border-radius: 3px;
 }

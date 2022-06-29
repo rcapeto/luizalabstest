@@ -3,12 +3,26 @@
    display: flex;
    padding: 16px;
 
+   @media (max-width: 767px) {
+      padding: 16px 8px;
+   }
+
    div {
-      &.home {
+      &.content {
          display: flex;
          flex-direction: column;
          align-items: center;
          text-align: center;
+
+         .heroSeparator {
+            display: none;
+         }
+
+         img {
+            @media (max-width: 1024px) {
+               max-width: 50%;
+            }
+         }
 
          h1 {
             margin: 10px 0;
@@ -16,6 +30,11 @@
             font-size: 32px;
             text-transform: uppercase;
             line-height: 42px;
+
+            @media (max-width: 1024px) {
+               font-size: 24px;
+               line-height: 34px;
+            }
          }
 
          p {
@@ -23,12 +42,63 @@
             font-weight: 400;
             font-size: 18px;
             line-height: 28px;
+
+            @media (max-width: 1024px) {
+               font-size: 14px;
+               line-height: 24px;
+            }
          }
 
          .searchBox {
             margin-top: 50px;
             width: 100%;
             max-width: 90%;
+         }
+      }
+   }
+}
+
+.heroPage {
+   width: 100%;
+
+   .content {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px;
+
+      @media (max-width: 768px) {
+         justify-content: flex-start;
+      }
+
+      @media (max-width: 575px) {
+         flex-direction: column;
+      }
+
+      p,
+      h1 {
+         display: none;
+      }
+
+      .heroSeparator {
+         width: 100px;
+
+         @media (max-width: 768px) {
+            display: none;
+         }
+      }
+
+      .searchBox {
+         width: 50%;
+
+         @media (max-width: 768px) {
+            width: 100%;
+         }
+
+         @media (max-width: 575px) {
+            margin-top: 20px;
          }
       }
    }

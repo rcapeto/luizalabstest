@@ -1,12 +1,12 @@
 import { api } from './api';
 import { APIResponse, GetResponse, Hero, ComicAPIData } from '../@types/api';
 
-export const getHeroes = async (page?: number): Promise<GetResponse<Hero[]>> => {
+export const getHeroes = async (page?: number, sortByName?: boolean): Promise<GetResponse<Hero[]>> => {
    const { data: response } = await api.get<APIResponse<Hero>>('characters', { 
       params: {
-         orderBy: '-modified',
+         orderBy: sortByName ? 'name' : '-modified',
          limit: 20,
-         offset: page ?? 1,
+         offset: (page ?? 1) * 20,
       }
    });
    return { data: response.data.results ?? [], total: response.data.total };

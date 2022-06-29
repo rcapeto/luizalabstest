@@ -25,6 +25,15 @@ export interface Hero {
    comics: {
       available: number;
       items: Comic[];
+   };
+   series: {
+      available: number;
+   };
+   stories: {
+      available: number;
+   };
+   events: {
+      available: number;
    }
 };
 
@@ -42,4 +51,5 @@ export interface ComicAPIData {
       path: string;
       extension: string;
    };
+   modified: string;
 };

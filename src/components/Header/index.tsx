@@ -1,7 +1,9 @@
 import { FunctionComponent } from 'react';
+import { Link } from 'react-router-dom';
 
 import styles from './styles.module.scss';
-import small_logo from '../../assets/logo.svg';
+import big_logo from '../../assets/logo.svg';
+import small_logo from '../../assets/logo_menor.svg';
 import { SearchBar } from '../SearchBar';
 
 export interface HeaderProps {
@@ -17,8 +19,10 @@ export const Header: FunctionComponent<HeaderProps> = ({
 }) => {
    return(
       <header className={styles[isHomePage ? 'homePage' : 'heroPage']}>
-         <div className={styles.home}>
-            <img src={small_logo} alt="Símbolo da Marvel" />
+         <div className={styles.content}>
+            <Link to="/">
+               <img src={isHomePage ? big_logo : small_logo} alt="Símbolo da Marvel" />
+            </Link>
             <h1>Explore o Universo</h1>
             <p>
                Mergulhe no domínio deslumbrante de todos os personagens clássicos que você ama -
@@ -32,6 +36,8 @@ export const Header: FunctionComponent<HeaderProps> = ({
                   onChangeText={onChangeText}
                />
             </div>
+
+            <div className={styles.heroSeparator}/>
          </div>
       </header>
    );

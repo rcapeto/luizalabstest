@@ -1,11 +1,17 @@
 .searchBarContainer {
    display: flex;
    align-items: center;
-   border-radius: 16px;
+   border-radius: 34px;
    padding: 0 16px;
    height: 70px;
    background-repeat: no-repeat;
    background-size: cover;
+   box-shadow: 0px 3px 6px #00000029;
+   
+   &.isHero {
+      height: unset;
+      padding: 5px 16px;
+   }
 
    input {
       height: 100%;
@@ -15,7 +21,19 @@
       border: 0;
       color: var(--gray);
       font-size: 16px;
+      line-height: 26px;
       background-color: transparent;
+
+      &.notHome {
+         &::placeholder {
+            color: var(--gray);
+         }
+      }
+
+      @media (max-width: 767px) {
+         font-size: 12px;
+         line-height: 22px;
+      }
 
       &::placeholder {
          color: var(--red);

@@ -18,13 +18,17 @@ export const SearchBar: FunctionComponent<SearchBarProps> = ({
    onChangeText
 }) => {
    return(
-      <div className={styles.searchBarContainer} style={{ backgroundImage: `url(${isHomePage ? searchBarRed : searchBarWhite})` }}>
+      <div 
+         className={`${styles.searchBarContainer} ${!isHomePage ? styles.isHero : ''}`} 
+         style={{ backgroundImage: `url(${isHomePage ? searchBarRed : searchBarWhite})` }}
+      >
          <BiSearch color="#e23636" size={22}/>
          <input 
             type="text"
             value={text}
             onChange={({ target: { value }}) => onChangeText(value)}
             placeholder="Procure por heróis"
+            className={!isHomePage ? styles.notHome : ''}
          />
       </div>
    );

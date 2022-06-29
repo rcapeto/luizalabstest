@@ -4,11 +4,23 @@
    align-items: center;
    gap: 5px;
 
+   @media (max-width: 575px) {
+      padding: 0 8px;
+   }
+
+   @media (max-width: 425px) {
+      flex-direction: column;
+   }
+
    .info {
       color: var(--gray);
       font-size: 16px;
       line-height: 26px;
-      font-weight: 400
+      font-weight: 400;
+
+      @media (max-width: 425px) {
+         margin-bottom: 10px;
+      }
    }
 };
 
