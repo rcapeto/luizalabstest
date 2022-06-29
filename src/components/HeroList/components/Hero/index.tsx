@@ -37,11 +37,10 @@ export const HeroItem: FunctionComponent<HeroItemProps> = ({ hero }) => {
       });
    };
 
-
    return(
       <div className={styles.heroItemContainer} onMouseOver={() => handlePrefecthHero(hero.id)}>
          <Link to={`/hero/${hero.id}`}>
-            <img src={image} alt={hero.name} />
+            <img src={image} alt={hero.name} className={styles.image}/>
          </Link>
 
          <div>

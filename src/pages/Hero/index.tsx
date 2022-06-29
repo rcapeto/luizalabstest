@@ -11,7 +11,10 @@ import { Header } from '../../components/Header';
 import { Footer } from '../../components/Footer';
 import { Loading } from '../../components/Loading';
 import { Error } from '../../components/Error';
+import { ComicsList } from '../../components/ComicsList';
+import { HeroRating } from '../../components/HeroRating';
 
+import { Hero as HeroType } from '../../@types/api';
 import { client } from '../../config/react-query';
 
 import favoriteON from '../../assets/favorito_01.svg';
@@ -20,7 +23,6 @@ import icComics from '../../assets/ic_quadrinhos.svg';
 import icMovies from '../../assets/ic_trailer.svg';
 
 import styles from './styles.module.scss';
-import { Hero as HeroType } from '../../@types/api';
 
 export const Hero: FunctionComponent = () => {
    const { heroId } = useParams<{ heroId: string }>();
@@ -124,14 +126,14 @@ export const Hero: FunctionComponent = () => {
                   <p>{currentHero.description}</p>
 
                   <div className={styles.info}>
-                     <div>
+                     <div className={styles.infoItem}>
                         <strong>Quadrinhos</strong>
                         <span>
                            <img src={icComics} alt="Ícone de Quadrinos" />
                            <p>{currentHero.comics.available}</p>
                         </span>
                      </div>
-                     <div>
+                     <div className={styles.infoItem}>
                         <strong>Filmes</strong>
                         <span>
                            <img src={icMovies} alt="Ícone de Filmes" />
@@ -140,13 +142,15 @@ export const Hero: FunctionComponent = () => {
                      </div>
                   </div>
 
+                  <HeroRating rate={Math.floor(Math.random() * 6)}/>
+
                   {
-                     ordernedComics && (
+                     ordernedComics && ordernedComics[0] && (
                         <div className={styles.lastComic}>
                            <p>
                               <strong>Último quadrinho:</strong> {
                                  format(
-                                    new Date(ordernedComics?.[0].modified),
+                                    new Date(ordernedComics[0].modified),
                                     "d MMM'.' y",
                                     { locale: ptBR }
                                  )
@@ -168,32 +172,11 @@ export const Hero: FunctionComponent = () => {
             <section className={styles.comicsContainer}>
                <h2>Últimos Lançamentos</h2>
 
-               <div className={styles.content}>
-               {
-                  isLoadingComics && !isErrorComics ? (
-                     <Loading /> 
-                  ) : isErrorComics ? (
-                     <Error />
-                  ) : (
-                     <div className={styles.comicsItems}>
-                        {
-                           comicsResponse && 
-                           comicsResponse.data &&
-                           Array.isArray(comicsResponse.data) &&
-                           comicsResponse.data.map(comic => (
-                              <div className={styles.comicItem} key={String(comic.id)}>
-                                 <img 
-                                    src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`} 
-                                    alt={`Imagem de capa do quadrinho ${comic.title}`} 
-                                 />
-                                 <p>{comic.title}</p>
-                              </div>
-                           ))
-                        }
-                     </div>
-                  )
-               } 
-               </div>
+               <ComicsList 
+                  isError={isErrorComics}
+                  isLoading={isLoadingComics}
+                  comics={comicsResponse?.data ?? []}
+               />
             </section>
          </div>
 

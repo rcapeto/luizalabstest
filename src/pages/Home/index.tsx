@@ -1,7 +1,7 @@
 import { FunctionComponent, useState, useEffect } from 'react';
 
 import { Hero } from '../../@types/api';
-import { useGetHeroes } from '../../hooks/useApi';
+import { useGetHeroes, useGetHeroesWithText } from '../../hooks/useApi';
 
 import { Footer } from '../../components/Footer';
 import { Header } from '../../components/Header';
@@ -13,24 +13,42 @@ import styles from './styles.module.scss';
 export const Home: FunctionComponent = () => {
    const [text, setText] = useState('');
    const [heroes, setHeroes] = useState<Hero[]>([]);
-   const [filterHeroesWithText, setFilterHeroesWithText] = useState<Hero[]>([]);
+   const [filteredHeroesWithText, setFilteredHeroesWithText] = useState<Hero[]>([]);
    const [page, setPage] = useState<number>(1);
+
+   const hasTextInSearchInput = text.trim().length > 0;
 
    const { activeFavoriteButton, favoritedHeroes, activeOrderByButton } = useHero();
    const { data: response, isLoading, isError } = useGetHeroes(page, activeOrderByButton);
+   const { 
+      data: heroesResponseWithText, 
+      isLoading: isLoadingHeroesWithText,
+      isError: isErrorHeroesWithText 
+   } = useGetHeroesWithText(text);
 
    useEffect(() => {
-      const data = activeFavoriteButton ? favoritedHeroes : ((response && Array.isArray(response.data) && response.data) || []);
+      const data = 
+         activeFavoriteButton ? 
+         favoritedHeroes : 
+            !(hasTextInSearchInput) ? 
+            ((response && Array.isArray(response.data) && response.data) || []) : 
+            ((heroesResponseWithText && Array.isArray(heroesResponseWithText.data) && heroesResponseWithText.data) || []);
       setHeroes(data);
-   }, [response, activeFavoriteButton, favoritedHeroes]);
+   }, [response, activeFavoriteButton, favoritedHeroes, heroesResponseWithText, activeOrderByButton]);
 
    useEffect(() => {
-      const value = text.toLowerCase();
-
-      setFilterHeroesWithText(
-         heroes.filter(hero => hero.name.toLowerCase().includes(value))
+      const heroesWithText = (
+         (heroesResponseWithText && Array.isArray(heroesResponseWithText.data) && 
+            heroesResponseWithText.data
+         ) || []
       );
-   }, [text]);
+
+      setFilteredHeroesWithText(
+         activeOrderByButton ? 
+            heroesWithText.sort((a, b) => a.name < b.name ? -1 : 1) :
+            heroesWithText.sort((a, b) => b.name < a.name ? -1 : 1)
+      );
+   }, [hasTextInSearchInput, activeOrderByButton, heroesResponseWithText]);
 
    return(
       <main className={styles.homeContainer}>
@@ -40,16 +58,17 @@ export const Home: FunctionComponent = () => {
                onChangeText={setText}
             />
             <HeroList 
-               heroes={text.trim().length > 0 ? filterHeroesWithText : heroes}
-               isError={isError}
-               isLoading={isLoading}
+               heroes={hasTextInSearchInput && activeOrderByButton ? filteredHeroesWithText : heroes}
+               isError={hasTextInSearchInput ? isErrorHeroesWithText : isError}
+               isLoading={hasTextInSearchInput ? isLoadingHeroesWithText : isLoading}
                page={page}
                onChangePage={setPage}
                totalHeroes={
-                  text.trim().length > 0 ? 
-                  filterHeroesWithText.length : 
-                  activeFavoriteButton ? favoritedHeroes.length :
-                  (response?.total ?? 0)
+                  activeFavoriteButton ? 
+                  favoritedHeroes.length : 
+                     (hasTextInSearchInput) ? 
+                        (heroesResponseWithText?.total ?? 0) : 
+                        (response?.total ?? 0)
                }
             />
          </div>

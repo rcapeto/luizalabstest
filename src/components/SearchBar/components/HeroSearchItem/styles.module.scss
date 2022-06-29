@@ -1,0 +1,64 @@
+.anchor {
+   text-decoration: none;
+   color: var(--black);
+
+   .heroItemContainer {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      transition: all ease .6s;
+      padding: 10px;
+   
+      &:hover {
+         background-color: rgba(0, 0, 0, 0.3);
+         filter: brightness(.7);
+      }
+   
+      img {
+         height: auto;
+         width: 60px;
+         object-fit: cover;
+      }
+   
+      span {
+         color: var(--black);
+         font-size: 14px;
+         line-height: 24px;
+         margin-left: 10px;
+         display: block;
+         display: -webkit-box;
+         -webkit-line-clamp: 3;
+         -webkit-box-orient: vertical;
+         overflow: hidden;
+         text-overflow: ellipsis;
+      }
+
+      .infos {
+         display: flex;
+         align-items: center;
+
+         .info {
+            margin-left: 10px;
+
+            strong {
+               font-size: 12px;
+            }
+
+            div {
+               display: flex;
+               align-items: center;
+
+               img {
+                  width: 100%;
+                  max-width: 20px;
+               }
+
+               span {
+                  font-size: 12px;
+                  margin-left: 5px;
+               }
+            }
+         }
+      }
+   };
+}

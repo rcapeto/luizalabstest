@@ -54,7 +54,7 @@
                justify-content: space-between;
                margin-top: 15px;
 
-               div {
+               .infoItem {
                   display: flex;
                   flex-direction: column;
 
@@ -90,6 +90,7 @@
                   font-size: 14px;
                   color: var(--black);
                   margin: 0;
+                  font-weight: 400;
                }
             }
          }
@@ -119,63 +120,6 @@
             font-size: 18px;
             line-height: 28px;
             text-align: left;
-         }
-   
-         .content {
-            .comicsItems {
-               padding-top: 30px;
-               padding-bottom: 60px;
-               display: grid;
-               grid-template-columns: repeat(6, 1fr);
-
-               @media (max-width: 1024px) {
-                  grid-template-columns: repeat(4, 1fr);
-               }
-
-               @media (max-width: 767px) {
-                  grid-template-columns: repeat(2, 1fr);
-               }
-
-               @media (max-width: 480px) {
-                  grid-template-columns: repeat(1, 1fr);
-               }
-
-               .comicItem {
-                  margin: 10px;
-
-                  @media (max-width: 767px) {
-                     margin: 10px 5px;
-                  }
-
-                  @media (max-width: 480px) {
-                     margin: 10px 0;
-                  }
-
-                  img {
-                     width: 100%;
-                     height: auto;
-                  }
-
-                  p {
-                     font-size: 16px;
-                     margin-top: 10px;
-                     font-weight: bold;
-                     color: var(--gray);
-                     text-align: left;
-                     width: 100%;
-                     display: -webkit-box;
-                     max-width: 250px;
-                     -webkit-line-clamp: 3;
-                     -webkit-box-orient: vertical;
-                     overflow: hidden;
-                     text-overflow: ellipsis;
-                   
-                     @media (max-width: 1024px) {
-                        max-width: 190px;
-                     }
-                  }
-               }
-            }
          }
       }
    }

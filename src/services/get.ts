@@ -12,6 +12,23 @@ export const getHeroes = async (page?: number, sortByName?: boolean): Promise<Ge
    return { data: response.data.results ?? [], total: response.data.total };
 }; 
 
+export const getHeroesWithText = async (text: string): Promise<GetResponse<Hero[]>> => {
+   if(!text.trim().length) {
+      return {
+         data: [],
+         total: 0
+      }
+   };
+
+   const { data: response } = await api.get<APIResponse<Hero>>('characters', { 
+      params: {
+         limit: 10,
+         nameStartsWith: text,
+      }
+   });
+   return { data: response.data.results ?? [], total: response.data.total };
+}; 
+
 export const getHero = async (heroId: number): Promise<GetResponse<Hero>> => {
    const { data: response } = await api.get<APIResponse<Hero>>(`characters/${heroId}`);
    const data = response.data.results?.[0] ?? null;
