@@ -50,7 +50,7 @@ export const Hero: FunctionComponent = () => {
 
             response.data && setIsFavorite(hasHeroInFavorites(response.data.id));
          } catch(err) {
-            console.log('Error load Hero');
+            console.error('Error load Hero');
          }
       }
       setIsLoadingPage(false);
@@ -102,7 +102,7 @@ export const Hero: FunctionComponent = () => {
          />
 
          <div className={styles.heroContent}>
-            <section className={styles.hero}>
+            <section className={styles.hero} data-hero-name={currentHero.name}>
                <div className={styles.left}>
                   <header>
                      <p>{currentHero.name}</p>

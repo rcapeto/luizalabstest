@@ -13,6 +13,9 @@
    border: 1px solid var(--white);
    transition: all ease 1s;
    cursor: pointer;
+   transform: translate3d(0,0,0);
+   overflow: hidden;
+   -webkit-overflow-scrolling: touch;
 
    &.show {
       visibility: visible;

@@ -8,14 +8,6 @@ const apikeyPrivate = import.meta.env.VITE_APP_API_KEY_PRIVATE;
 const time = Number(new Date());
 const hash = md5(time + apikeyPrivate + apikey);
 
-console.log('HERE', { 
-   baseURL,
-   apikey,
-   apikeyPrivate,
-   time,
-   hash
-});
-
 export const api = axios.create({
    baseURL,
    params: { apikey, ts: time, hash }
