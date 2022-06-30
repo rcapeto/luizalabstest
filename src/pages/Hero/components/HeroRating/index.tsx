@@ -1,20 +1,16 @@
 import { FunctionComponent } from 'react';
 
-import fullStar from '../../assets/avaliacao_on.svg';
-import emptyStar from '../../assets/avaliacao_off.svg';
+import fullStar from '../../../../assets/avaliacao_on.svg';
+import emptyStar from '../../../../assets/avaliacao_off.svg';
 
 import styles from './styles.module.scss';
 
-interface HeroRatingProps {
-   rate: number;
-};
+//Reponse api doesn't have hero hate, so I do a fake rate.
+export const HeroRating: FunctionComponent = () => {
+   const stars = [0, 0, 0, 0, 0];
+   const rate = 3;
 
-export const HeroRating: FunctionComponent<HeroRatingProps> = ({ rate }) => {
-   const stars = [0, 0, 0, 0, 0, 0];
-
-   for(let i = 0; i < rate; i++) {
-      stars[i] = 1;
-   }
+   for(let i = 0; i < rate; i++) stars[i] = 1;
 
    return(
       <div className={styles.rateContainer}>

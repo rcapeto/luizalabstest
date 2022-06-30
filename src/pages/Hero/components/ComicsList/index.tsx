@@ -1,9 +1,10 @@
 import { FunctionComponent } from 'react';
 
-import { Error } from '../Error';
-import { Loading } from '../Loading';
+import { ComicAPIData } from '../../../../@types/api';
 
-import { ComicAPIData } from '../../@types/api';
+import { Error } from '../../../../components/Error';
+import { Loading } from '../../../../components/Loading';
+
 import styles from './styles.module.scss';
 
 interface ComicsListProps {

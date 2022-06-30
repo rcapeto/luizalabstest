@@ -1,18 +1,20 @@
 import { FunctionComponent } from 'react';
 
-import { useHero } from '../../context/HeroContext';
-import { Loading } from '../Loading';
-import { HeroItem } from './components/Hero';
-import { Error } from '../Error';
-import { Hero } from '../../@types/api';
+import { Hero } from '../../../../@types/api';
 
-import imageHero from '../../assets/ic_heroi.svg';
-import toggleON from '../../assets/toggle_on.svg';
-import toggleOFF from '../../assets/toggle_off.svg';
-import favoriteON from '../../assets/favorito_01.svg';
-import favoriteOFF from '../../assets/favorito_02.svg';
+import { useHero } from '../../../../context/HeroContext';
+import { Loading } from '../../../../components/Loading';
+import { HeroItem } from './components/Hero';
+import { Error } from '../../../../components/Error';
+import { Pagination } from '../../../../components/Pagination';
+
+import imageHero from '../../../../assets/ic_heroi.svg';
+import toggleON from '../../../../assets/toggle_on.svg';
+import toggleOFF from '../../../../assets/toggle_off.svg';
+import favoriteON from '../../../../assets/favorito_01.svg';
+import favoriteOFF from '../../../../assets/favorito_02.svg';
+
 import styles from './styles.module.scss';
-import { Pagination } from '../Pagination';
 
 interface HeroListProps {
    heroes: Hero[];

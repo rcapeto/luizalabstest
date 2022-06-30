@@ -32,10 +32,6 @@ export const HeroContextProvider: FunctionComponent<HeroContextProviderProps> = 
       return hasChangeState;
    };
 
-   const handleFilterHeroes = (heroes: Hero[], text: string) => {
-      heroDispatch({ type: 'SET_FILTERED_HEROES', payload: { text, heroes }});
-   };
-
    const toggleFavoriteButton = () => {
       heroDispatch({ type: 'TOGGLE_FAVORITE_BUTTON' });
    };
@@ -46,11 +42,7 @@ export const HeroContextProvider: FunctionComponent<HeroContextProviderProps> = 
 
    const getFavoritesHeroes = (): Hero[] => {
       const herosStr = localStorage.getItem('favorited_heroes_marvel');
-      if(herosStr) {
-         return JSON.parse(herosStr);
-      }
-
-      return [];
+      return herosStr ? JSON.parse(herosStr) : [];
    };
 
    const hasHeroInFavorites = (heroId: number): boolean => {
@@ -68,7 +60,6 @@ export const HeroContextProvider: FunctionComponent<HeroContextProviderProps> = 
          value={{ 
             ...heroState, 
             handleFavoriteHero, 
-            handleFilterHeroes,
             toggleFavoriteButton,
             toggleOrderByButton,
             hasHeroInFavorites

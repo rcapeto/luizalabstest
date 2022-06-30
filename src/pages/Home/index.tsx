@@ -2,10 +2,12 @@ import { FunctionComponent, useState, useEffect } from 'react';
 
 import { Hero } from '../../@types/api';
 import { useGetHeroes, useGetHeroesWithText } from '../../hooks/useApi';
+import { getHeroItems } from './utils/getHeroItems';
+import { returnHeroesArray } from './utils/returnHeroesArray';
 
 import { Footer } from '../../components/Footer';
 import { Header } from '../../components/Header';
-import { HeroList } from '../../components/HeroList';
+import { HeroList } from './components/HeroList';
 import { useHero } from '../../context/HeroContext';
 
 import styles from './styles.module.scss';
@@ -27,21 +29,26 @@ export const Home: FunctionComponent = () => {
    } = useGetHeroesWithText(text);
 
    useEffect(() => {
-      const data = 
-         activeFavoriteButton ? 
-         favoritedHeroes : 
-            !(hasTextInSearchInput) ? 
-            ((response && Array.isArray(response.data) && response.data) || []) : 
-            ((heroesResponseWithText && Array.isArray(heroesResponseWithText.data) && heroesResponseWithText.data) || []);
+      const data = getHeroItems(
+         response, 
+         heroesResponseWithText, 
+         hasTextInSearchInput, 
+         favoritedHeroes, 
+         activeFavoriteButton
+      );
+
       setHeroes(data);
-   }, [response, activeFavoriteButton, favoritedHeroes, heroesResponseWithText, activeOrderByButton]);
+   }, [
+      response, 
+      activeFavoriteButton, 
+      favoritedHeroes, 
+      heroesResponseWithText, 
+      activeOrderByButton, 
+      hasTextInSearchInput
+   ]);
 
    useEffect(() => {
-      const heroesWithText = (
-         (heroesResponseWithText && Array.isArray(heroesResponseWithText.data) && 
-            heroesResponseWithText.data
-         ) || []
-      );
+      const heroesWithText = returnHeroesArray(heroesResponseWithText);
 
       setFilteredHeroesWithText(
          activeOrderByButton ? 

@@ -1,12 +1,13 @@
 import { FunctionComponent, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Hero } from '../../../../@types/api';
-import favoriteON from '../../../../assets/favorito_01.svg';
-import favoriteOFF from '../../../../assets/favorito_02.svg';
-import { useHero } from '../../../../context/HeroContext';
-import { client } from '../../../../config/react-query';
-import { getHero } from '../../../../services/get';
+import { Hero } from '../../../../../../@types/api';
+import { useHero } from '../../../../../../context/HeroContext';
+import { client } from '../../../../../../config/react-query';
+import { getHero } from '../../../../../../services/get';
+
+import favoriteON from '../../../../../../assets/favorito_01.svg';
+import favoriteOFF from '../../../../../../assets/favorito_02.svg';
 
 import styles from './styles.module.scss';
 

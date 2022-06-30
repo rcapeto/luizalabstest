@@ -1,21 +1,20 @@
 import { FunctionComponent, useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { format } from 'date-fns';
-import ptBR from 'date-fns/locale/pt-BR';
 
 import { useGetComics } from '../../hooks/useApi';
 import { getHero } from '../../services/get';
 import { useHero } from '../../context/HeroContext';
+import { Hero as HeroType } from '../../@types/api';
+import { client } from '../../config/react-query';
+import { formatDate } from './utils/formatData';
+import { getOrdenedComics } from './utils/getOrdernedComics';
 
 import { Header } from '../../components/Header';
 import { Footer } from '../../components/Footer';
 import { Loading } from '../../components/Loading';
 import { Error } from '../../components/Error';
-import { ComicsList } from '../../components/ComicsList';
-import { HeroRating } from '../../components/HeroRating';
-
-import { Hero as HeroType } from '../../@types/api';
-import { client } from '../../config/react-query';
+import { ComicsList } from './components/ComicsList';
+import { HeroRating }  from './components/HeroRating';
 
 import favoriteON from '../../assets/favorito_01.svg';
 import favoriteOFF from '../../assets/favorito_02.svg';
@@ -57,19 +56,15 @@ export const Hero: FunctionComponent = () => {
    };
 
    const favoriteItem = () => {
-      if(currentHero) {
-         const hasAdd = handleFavoriteHero(currentHero);
-         hasAdd && setIsFavorite(!isFavorite);
-      }
+      if(!currentHero) return;
+
+      const hasAdd = handleFavoriteHero(currentHero);
+      hasAdd && setIsFavorite(!isFavorite);
    };
 
    useEffect(() => {
       (async() => {
-         if(!heroId) {
-            navigate('/');
-         } else {
-            await handleCheckCacheHero(+heroId);
-         }
+         !heroId ? navigate('/') : await handleCheckCacheHero(+heroId);
       })();
    }, [heroId]);
 
@@ -95,11 +90,7 @@ export const Hero: FunctionComponent = () => {
       );
    }
 
-   const ordernedComics = comicsResponse && 
-      comicsResponse.data && 
-      Array.isArray(comicsResponse.data) && 
-      comicsResponse.data.sort((a, b) => new Date(b.modified).getTime() - new Date(a.modified).getTime())
-   ;
+   const ordernedComics = getOrdenedComics(comicsResponse);
 
    return(
       <main className={styles.heroPage}>
@@ -142,19 +133,13 @@ export const Hero: FunctionComponent = () => {
                      </div>
                   </div>
 
-                  <HeroRating rate={Math.floor(Math.random() * 6)}/>
+                  <HeroRating />
 
                   {
                      ordernedComics && ordernedComics[0] && (
                         <div className={styles.lastComic}>
                            <p>
-                              <strong>Último quadrinho:</strong> {
-                                 format(
-                                    new Date(ordernedComics[0].modified),
-                                    "d MMM'.' y",
-                                    { locale: ptBR }
-                                 )
-                              }
+                              <strong>Último quadrinho:</strong> {formatDate(ordernedComics[0].modified)}
                            </p>
                         </div>
                      )
