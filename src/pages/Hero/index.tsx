@@ -8,6 +8,7 @@ import { Hero as HeroType } from '../../@types/api';
 import { client } from '../../config/react-query';
 import { formatDate } from './utils/formatData';
 import { getOrdenedComics } from './utils/getOrdernedComics';
+import { variables } from '../../config/variables';
 
 import { Header } from '../../components/Header';
 import { Footer } from '../../components/Footer';
@@ -37,7 +38,7 @@ export const Hero: FunctionComponent = () => {
       setIsLoadingPage(true);
 
       const queryCache = client.getQueryCache();
-      const currentHeroCache = queryCache.find<HeroType>(['hero-pre-fetching', heroId]);
+      const currentHeroCache = queryCache.find<HeroType>([variables.react_query.hero_pre_fetching, heroId]);
 
       if(currentHeroCache && currentHeroCache.state.data) {
          setCurrentHero(currentHeroCache.state.data);

@@ -1,5 +1,7 @@
 import { useQuery, UseQueryOptions } from 'react-query';
+
 import { GetResponse, Hero, ComicAPIData } from '../@types/api';
+import { variables } from '../config/variables';
 
 import { getHeroes, getHero, getComicsByHero, getHeroesWithText } from '../services/get';
 
@@ -10,22 +12,24 @@ export const useGetHeroes = (
    sortByName?: boolean, 
    options?: UseQueryOptions<GetResponse<Hero[]>>
 ) => {
-   return useQuery<GetResponse<Hero[]>>(['heroes', page, sortByName], async () => await getHeroes(page, sortByName), {
-      ...options,
-      staleTime: five_seconds,
-   });
+   return useQuery<GetResponse<Hero[]>>(
+      [variables.react_query.get_heroes, page, sortByName], 
+      async () => await getHeroes(page, sortByName), 
+      { ...options, staleTime: five_seconds }
+   );
 };
 
 export const useGetHero = (heroId: number, options?: UseQueryOptions<GetResponse<Hero>>) => {
-   return useQuery<GetResponse<Hero>>(['hero', heroId], async () => await getHero(heroId), {
-      ...options,
-      staleTime: five_seconds,
-   });
+   return useQuery<GetResponse<Hero>>(
+      [variables.react_query.get_hero, heroId], 
+      async () => await getHero(heroId), 
+      { ...options, staleTime: five_seconds }
+   );
 };
 
 export const useGetComics = (heroId: number) => {
    return useQuery<GetResponse<ComicAPIData[]>>(
-      ['comics-heroId', heroId], 
+      [variables.react_query.get_comics, heroId], 
       async () => await getComicsByHero(heroId),
       {
          staleTime: five_seconds,
@@ -34,7 +38,9 @@ export const useGetComics = (heroId: number) => {
 };
 
 export const useGetHeroesWithText = (text: string) => {
-   return useQuery<GetResponse<Hero[]>>(['heroes-with-text', text], async () => await getHeroesWithText(text), {
-      staleTime: five_seconds,
-   });
+   return useQuery<GetResponse<Hero[]>>(
+      [variables.react_query.get_heroes_with_text, text], 
+      async () => await getHeroesWithText(text), 
+      { staleTime: five_seconds }
+   );
 };

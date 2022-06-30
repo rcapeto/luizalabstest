@@ -3,6 +3,7 @@ import { createContext, useContext, FunctionComponent, useEffect } from 'react';
 import { HeroContextProviderProps, HeroContextValues } from '../@types/components';
 import { Hero } from '../@types/api';
 import { useHeroReducer } from '../reducer/HeroReducer';
+import { variables } from '../config/variables';
 
 const HeroContext = createContext({} as HeroContextValues);
 
@@ -41,7 +42,7 @@ export const HeroContextProvider: FunctionComponent<HeroContextProviderProps> = 
    };
 
    const getFavoritesHeroes = (): Hero[] => {
-      const herosStr = localStorage.getItem('favorited_heroes_marvel');
+      const herosStr = localStorage.getItem(variables.localstorage.favorited);
       return herosStr ? JSON.parse(herosStr) : [];
    };
 

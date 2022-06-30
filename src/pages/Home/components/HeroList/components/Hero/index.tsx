@@ -2,6 +2,7 @@ import { FunctionComponent, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Hero } from '../../../../../../@types/api';
+import { variables } from '../../../../../../config/variables';
 import { useHero } from '../../../../../../context/HeroContext';
 import { client } from '../../../../../../config/react-query';
 import { getHero } from '../../../../../../services/get';
@@ -27,7 +28,7 @@ export const HeroItem: FunctionComponent<HeroItemProps> = ({ hero }) => {
    };
 
    const handlePrefecthHero = async (heroId: number) => {
-      await client.prefetchQuery(['hero-pre-fetching', heroId], async () => {
+      await client.prefetchQuery([variables.react_query.hero_pre_fetching, heroId], async () => {
          try {
             const response = await getHero(heroId);
             return response.data;

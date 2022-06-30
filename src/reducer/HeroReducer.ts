@@ -1,6 +1,7 @@
 import { useReducer } from 'react';
 
 import { HeroState, HeroActions } from '../@types/components';
+import { variables } from '../config/variables';
 
 const initialHeroState: HeroState = {
    favoritedHeroes: [],
@@ -19,21 +20,12 @@ const dispatch = (state: HeroState, actions: HeroActions) => {
          const heroIndex = favorites.findIndex(hero => hero.id === currentHeroId);
          heroIndex >= 0 ? favorites.splice(heroIndex, 1) : favorites.push(hero);
 
-         localStorage.setItem('favorited_heroes_marvel', JSON.stringify(favorites));
+         localStorage.setItem(variables.localstorage.favorited, JSON.stringify(favorites));
 
          return {
             ...state,
             favoritedHeroes: favorites,
          };
-      case 'SET_FILTERED_HEROES':
-         const heroes = actions.payload.heroes;
-         const value = actions.payload.text.toLowerCase();
-         const filteredHeroes = heroes.filter(hero => hero.name.toLowerCase().includes(value));
-         
-         return {
-            ...state,
-            filteredHeroes
-         }
       case 'TOGGLE_FAVORITE_BUTTON':
          return {
             ...state,
