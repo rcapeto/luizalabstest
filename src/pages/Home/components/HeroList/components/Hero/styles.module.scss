@@ -3,6 +3,10 @@
    cursor: pointer;
    text-decoration: none;
 
+   .anchor {
+      text-decoration: none;
+   }
+
    @media (max-width: 575px) {
       margin: 10px;
    }

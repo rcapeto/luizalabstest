@@ -4,6 +4,7 @@ import { ComicAPIData } from '../../../../@types/api';
 
 import { Error } from '../../../../components/Error';
 import { Loading } from '../../../../components/Loading';
+import { Image } from '../../../../components/Image';
 
 import styles from './styles.module.scss';
 
@@ -34,7 +35,7 @@ export const ComicsList: FunctionComponent<ComicsListProps> = ({
                   {
                      comics.map(comic => (
                         <div className={styles.comicItem} key={String(comic.id)}>
-                           <img 
+                           <Image 
                               src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`} 
                               alt={`Imagem de capa do quadrinho ${comic.title}`} 
                            />

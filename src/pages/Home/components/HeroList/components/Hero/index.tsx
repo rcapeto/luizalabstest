@@ -7,6 +7,8 @@ import { useHero } from '../../../../../../context/HeroContext';
 import { client } from '../../../../../../config/react-query';
 import { getHero } from '../../../../../../services/get';
 
+import { Image } from '../../../../../../components/Image';
+
 import favoriteON from '../../../../../../assets/favorito_01.svg';
 import favoriteOFF from '../../../../../../assets/favorito_02.svg';
 
@@ -41,14 +43,18 @@ export const HeroItem: FunctionComponent<HeroItemProps> = ({ hero }) => {
 
    return(
       <div className={styles.heroItemContainer} onMouseOver={() => handlePrefecthHero(hero.id)}>
-         <Link to={`/hero/${hero.id}`}>
-            <img src={image} alt={hero.name} className={styles.image}/>
+         <Link to={`/hero/${hero.id}`} className={styles.anchor}>
+            <Image 
+               src={image} alt={hero.name} className={styles.image}
+            />
+            {/* <img /> */}
          </Link>
 
          <div>
             <p>{hero.name}</p>
 
             <button onClick={favoriteItem}>
+              
                <img 
                   src={isFavorite ? favoriteON : favoriteOFF} 
                   alt={isFavorite ? 'Heroi favoritado' : 'Heroi não favoritado'} 

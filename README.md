@@ -45,7 +45,8 @@ The app will be available in the [web address](http://localhost:3000).
 
 ## 💻 Project
 
-- Test to Developer at Luizalabs
+- Test to Developer at Luizalabs;
+- Project in [Vercel](https://luizalabstest.vercel.app/)
 
 ## 👨🏻‍💻 Devs
 - [Raphael Capeto](https://github.com/rcapeto)

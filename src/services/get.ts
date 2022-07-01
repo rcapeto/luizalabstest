@@ -6,7 +6,7 @@ export const getHeroes = async (page?: number, sortByName?: boolean): Promise<Ge
       params: {
          orderBy: sortByName ? 'name' : '-modified',
          limit: 20,
-         offset: (page ?? 1) * 20,
+         offset: (page ?? 1) * 10,
       }
    });
    return { data: response.data.results ?? [], total: response.data.total };
